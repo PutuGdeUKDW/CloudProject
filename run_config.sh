@@ -3,8 +3,6 @@
 sudo yum install docker -y
 sudo systemctl start docker
 sudo systemctl enable docker
-sudo docker version
-
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
