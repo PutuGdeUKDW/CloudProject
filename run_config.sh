@@ -14,7 +14,7 @@ sudo mv docker-compose /usr/bin/
 mkdir tugas
 curl -O https://raw.githubusercontent.com/PutuGdeUKDW/CloudProject/main/docker-compose.yml
 sudo mv docker-compose.yml tugas/
-curl -O https://github.com/PutuGdeUKDW/CloudProject/blob/main/nginx.conf
+curl -O curl -O https://raw.githubusercontent.com/PutuGdeUKDW/CloudProject/main/nginx.conf
 sudo mv nginx.conf tugas/
 
 
