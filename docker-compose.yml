@@ -1,0 +1,39 @@
+# docker-compose.yml
+
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    env_file:
+      - .env
+
+  wordpress:
+    image: wordpress
+    networks:
+      - app-net
+    env_file:
+      - .env
+
+  db:
+    image: mariadb
+    networks:
+      - app-net
+    env_file:
+      - .env
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - app-net
+    env_file:
+      - .env
+    ports:
+      - "8080:80"
+
+networks:
+  app-net:
