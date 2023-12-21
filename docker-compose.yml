@@ -57,5 +57,5 @@ volumes:
   db:
 
 networks:
-  app-network:
+  app-net:
     driver: bridge
