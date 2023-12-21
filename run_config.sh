@@ -18,5 +18,6 @@ curl -O https://raw.githubusercontent.com/PutuGdeUKDW/CloudProject/main/nginx.co
 sudo mv nginx.conf tugas/
 curl -O https://raw.githubusercontent.com/PutuGdeUKDW/CloudProject/main/.env
 sudo mv .env tugas/
-
+cd tugas/
+docker-compose up -d
 
