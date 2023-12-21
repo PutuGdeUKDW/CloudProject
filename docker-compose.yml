@@ -5,38 +5,57 @@ services:
     image: nginx
     ports:
       - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - wordpress:/var/www/html
     networks:
       - app-net
-    env_file:
-      - .env
 
   wordpress:
     image: wordpress
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+    volumes:
+      - wordpress:/var/www/html
     networks:
       - app-net
-    env_file:
-      - .env
 
   db:
     image: mariadb
+    ports:
+      - "3306:3306"
     networks:
       - app-net
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  # Add this line
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    env_file:
-      - .env
 
   pma:
     image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: localhost:8081
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    links:
+      - db
+    restart: always
     networks:
       - app-net
-    env_file:
-      - .env
-    ports:
-      - "8080:80"
+
+volumes: 
+  wordpress: 
+  db:
 
 networks:
-  app-net:
+  app-network:
+    driver: bridge
