@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl -O https://raw.githubusercontent.com/PutuGdeUKDW/CloudProject/main/run_config.sh
+
+chmod +x run_config.sh
+./run_config.sh
